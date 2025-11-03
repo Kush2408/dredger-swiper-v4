@@ -1,0 +1,68 @@
+:root { 
+  --ocean-blue:#00a8e8; 
+  --glow-green:#00ff9d; 
+  --alert-orange:#ff7b00; 
+  --steel-gray:#2d3748; 
+  --deep-space:#0f172a;
+  --bg-primary: #0a0a0a;
+  --text-primary: #e0e0e0;
+  --text-secondary: #9ca3af;
+  --panel-bg: #121212;
+  --border-color: #2a2a2a;
+}
+body { font-family: 'Orbitron', sans-serif; background-color: var(--bg-primary); color: var(--text-primary); }
+.panel { background-color: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.3); }
+.panel-header { border-bottom: 1px solid var(--border-color); background: linear-gradient(90deg, var(--panel-bg) 0%, #1a1a1a 100%); }
+.status-indicator { width:12px; height:12px; border-radius:50%; display:inline-block; margin-right:6px; }
+.status-ok { background-color:#00ff00; box-shadow:0 0 10px #00ff00; }
+.status-warning { background-color:#ffff00; box-shadow:0 0 10px #ffff00; }
+.status-critical { background-color:#ff0000; box-shadow:0 0 10px #ff0000; }
+.digital-gauge { font-family:'Orbitron', sans-serif; font-size:1.8rem; color:#00ff00; text-shadow:0 0 5px #00ff00; }
+.alert-item { border-left: 4px solid; transition: all 0.3s ease; }
+.alert-warning { border-left-color:#ffff00; background-color:rgba(255,255,0,0.05); }
+.alert-critical { border-left-color:#ff0000; background-color:rgba(255,0,0,0.05); }
+.neon-border {
+  position: relative;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(#121212, #121212), /* inner panel color */
+    linear-gradient(45deg, #00ff00, #00ffff, #00ff00); /* neon gradient */
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 0 10px rgba(0,255,0,.35);
+}
+.progress-bar{ height:6px; border-radius:3px; background-color: var(--border-color); overflow:hidden; }
+.progress-fill{ height:100%; transition:width .5s ease; }
+.progress-ok{ background-color:#00ff00; box-shadow:0 0 5px #00ff00; }
+.progress-warning{ background-color:#ffff00; box-shadow:0 0 5px #ffff00; }
+.progress-critical{ background-color:#ff0000; box-shadow:0 0 5px #ff0000; }
+.sparkline{ width:100%; height:40px; }
+
+/* Light theme overrides */
+.light-theme {
+  --ocean-blue: #0066cc;
+  --glow-green: #00cc66;
+  --alert-orange: #e67e22;
+  --steel-gray: #e2e8f0;
+  --deep-space: #f8fafc;
+  --bg-primary: #f8fafc;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --panel-bg: #ffffff;
+  --border-color: #e2e8f0;
+}
+
+/* Dark theme overrides (explicit) */
+.dark-theme {
+  --ocean-blue: #00a8e8;
+  --glow-green: #00ff9d;
+  --alert-orange: #ff7b00;
+  --steel-gray: #2d3748;
+  --deep-space: #0f172a;
+  --bg-primary: #0a0a0a;
+  --text-primary: #e0e0e0;
+  --text-secondary: #9ca3af;
+  --panel-bg: #121212;
+  --border-color: #2a2a2a;
+}

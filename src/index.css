@@ -1,0 +1,124 @@
+
+@import "tailwindcss";
+@import "./styles/shared-sidebar.css";
+
+body {
+    font-family: 'Orbitron','Roboto Mono',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+
+/* Custom Spinner Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-25%);
+  }
+}
+
+@keyframes wave {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}
+
+/* Spinner Animation Classes */
+.spinner-spin {
+  animation: spin 1s linear infinite;
+}
+
+.spinner-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.spinner-bounce {
+  animation: bounce 1s infinite;
+}
+
+.spinner-wave {
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+/* Ensure Tailwind animations work */
+.animate-spin {
+  animation: spin 1s linear infinite !important;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite !important;
+}
+
+/* Tailwind gray utilities harmonized with theme variables */
+.dark-theme body { color: var(--text-primary); background-color: var(--bg-primary); }
+.light-theme body { color: var(--text-primary); background-color: var(--bg-primary); }
+
+/* Utility tokens sync (charts & UI blocks using 'text-gray-*' etc.) */
+.light-theme .text-gray-100 { color: var(--text-primary) !important; }
+.light-theme .text-gray-200 { color: var(--text-secondary) !important; }
+.light-theme .text-gray-300 { color: var(--text-secondary) !important; }
+.light-theme .text-gray-400 { color: var(--text-secondary) !important; }
+.light-theme .text-gray-700 { color: var(--text-secondary) !important; }
+.light-theme .bg-gray-900 { background-color: var(--bg-primary) !important; }
+.light-theme .bg-gray-800 { background-color: var(--bg-secondary) !important; }
+.light-theme .bg-gray-700 { background-color: var(--hover-bg) !important; }
+.light-theme .border-gray-700 { border-color: var(--border-color) !important; }
+.light-theme .border-gray-600 { border-color: var(--border-color) !important; }
+.light-theme .border-gray-500 { border-color: var(--border-color) !important; }
+
+/* Dark theme overrides for better contrast */
+.dark-theme .text-gray-100 { color: var(--text-primary) !important; }
+.dark-theme .text-gray-200 { color: var(--text-secondary) !important; }
+.dark-theme .text-gray-300 { color: var(--text-secondary) !important; }
+.dark-theme .text-gray-400 { color: var(--text-secondary) !important; }
+.dark-theme .text-gray-700 { color: var(--text-secondary) !important; }
+.dark-theme .bg-gray-900 { background-color: var(--bg-primary) !important; }
+.dark-theme .bg-gray-800 { background-color: var(--bg-secondary) !important; }
+.dark-theme .bg-gray-700 { background-color: var(--hover-bg) !important; }
+.dark-theme .border-gray-700 { border-color: var(--border-color) !important; }
+.dark-theme .border-gray-600 { border-color: var(--border-color) !important; }
+.dark-theme .border-gray-500 { border-color: var(--border-color) !important; }
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-bg-1) 0%,
+    var(--skeleton-bg-2) 50%,
+    var(--skeleton-bg-1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 50s infinite ease-in-out;
+}
