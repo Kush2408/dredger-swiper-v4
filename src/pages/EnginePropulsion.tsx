@@ -162,8 +162,8 @@ export default function EnginePropulsion() {
       // ensuring that an empty `trend_analysis` object falls back to the other key.
       trend_analysis: mapTrend(
         ((raw as any).trend_analysis && Object.keys((raw as any).trend_analysis).length > 0)
-        ? (raw as any).trend_analysis :
-        (raw as any)['Engine Shaft Exhaust Fuel Lube Vibration Sensor Analysis']
+          ? (raw as any).trend_analysis :
+          (raw as any)['Engine Shaft Exhaust Fuel Lube Vibration Sensor Analysis']
       ),
       alerts: (raw as any)['Alerts & Notifications'],
       system_status: (raw as any)['system status'],
@@ -413,7 +413,7 @@ export default function EnginePropulsion() {
               ticks: {
                 color: textColor,
                 // Show only a few ticks for long datasets: first, middle, last
-                callback: function(this: any, _value: any, index: number) {
+                callback: function (this: any, _value: any, index: number) {
                   const len = labels.length;
                   if (len <= 7) return labels[index];
                   if (index === 0) return 'start';
@@ -536,7 +536,7 @@ export default function EnginePropulsion() {
   return (
     <div className="min-h-screen flex overflow-hidden bg-gray-900 text-gray-100">
       <Sidebar />
-  <div className="flex-1 flex flex-col overflow-hidden min-h-0">
+      <div className="flex-1 flex flex-col overflow-hidden min-h-0">
         {/* Top Bar */}
         <div className="bg-gray-800 border-b border-gray-700 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
           <div className="flex items-center space-x-4">
@@ -778,76 +778,7 @@ export default function EnginePropulsion() {
               </div>
             </div>
 
-            {/* Pressure Gauges */}
-            {(() => {
-              const hasFuel = data?.temperature_and_pressure?.['Fuel pressure sensor']?.length;
-              const hasLube = data?.temperature_and_pressure?.['Lube oil pressure sensor']?.length;
-              if (!loading && !hasFuel && !hasLube) {
-                return null;
-              }
-              return (
-            <div className="bg-gray-800 rounded-lg p-4">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-medium">Pressure Readings</h3>
-                <span className="text-sm text-gray-400">Current Values</span>
-              </div>
-              <div className="grid grid-cols-1 gap-4">
-                {loading ? (
-                  <>
-                    {[1, 2].map((i) => (
-                      <div key={i}>
-                        <Skeleton variant="text" className="w-1/3 mb-2" />
-                        <div className="h-32 flex items-center justify-center">
-                          <Spinner variant="dual-ring" size="xl" color="primary" />
-                        </div>
-                        <Skeleton variant="text" className="w-full text-center mt-1" />
-                      </div>
-                    ))}
-                  </>
-                ) : data ? (
-                  <>
-                    <div>
-                      <div className="text-sm mb-2">FUEL PRESSURE</div> 
-                      <div className="h-32 flex items-center justify-center">
-                        <div className="w-24 h-24 relative">
-                          <canvas id="fuelPressureGauge" className="w-full h-full block"></canvas>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="text-lg font-bold">{getCurrentValue(data.temperature_and_pressure?.['Fuel pressure sensor'], 0).toFixed(2)}</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-center text-xs mt-1 text-gray-400">Range: 3.5-5.0 bar</div>
-                    </div>
-                    <div>
-                      <div className="text-sm mb-2">LUBE OIL PRESSURE</div> 
-                      <div className="h-32 flex items-center justify-center">
-                        <div className="w-24 h-24 relative">
-                          <canvas id="lubePressureGauge" className="w-full h-full block"></canvas>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="text-lg font-bold">{getCurrentValue(data.temperature_and_pressure?.['Lube oil pressure sensor'], 0).toFixed(2)}</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-center text-xs mt-1 text-gray-400">Range: 3.0-4.5 bar</div>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {[1, 2].map((i) => (
-                      <div key={i}>
-                        <Skeleton variant="text" className="w-1/3 mb-2" />
-                        <div className="h-32 flex items-center justify-center">
-                          <Spinner variant="dual-ring" size="xl" color="primary" />
-                        </div>
-                        <Skeleton variant="text" className="w-full text-center mt-1" />
-                      </div>
-                    ))}
-                  </>
-                )}
-              </div>
-            </div>
-              )
-            })()}
+
           </div>
 
           {/* Middle Column */}
@@ -933,11 +864,83 @@ export default function EnginePropulsion() {
 
             {/* Alerts & Notifications */}
             <div className="bg-gray-800 rounded-lg p-4">
-              <div className="flex justify-between items-center mb-4">
+              {/* Pressure Gauges */}
+              {(() => {
+                const hasFuel = data?.temperature_and_pressure?.['Fuel pressure sensor']?.length;
+                const hasLube = data?.temperature_and_pressure?.['Lube oil pressure sensor']?.length;
+                if (!loading && !hasFuel && !hasLube) {
+                  return null;
+                }
+                return (
+                  <div className="bg-gray-800 rounded-lg p-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="font-medium">Pressure Readings</h3>
+                      <span className="text-sm text-gray-400">Current Values</span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-4">
+                      {loading ? (
+                        <>
+                          {[1, 2].map((i) => (
+                            <div key={i}>
+                              <Skeleton variant="text" className="w-1/3 mb-2" />
+                              <div className="h-32 flex items-center justify-center">
+                                <Spinner variant="dual-ring" size="xl" color="primary" />
+                              </div>
+                              <Skeleton variant="text" className="w-full text-center mt-1" />
+                            </div>
+                          ))}
+                        </>
+                      ) : data ? (
+                        <>
+                          <div>
+                            <div className="text-sm mb-2">FUEL PRESSURE</div>
+                            <div className="h-32 flex items-center justify-center">
+                              <div className="w-24 h-24 relative">
+                                <canvas id="fuelPressureGauge" className="w-full h-full block"></canvas>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <div className="text-lg font-bold">{getCurrentValue(data.temperature_and_pressure?.['Fuel pressure sensor'], 0).toFixed(2)}</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="text-center text-xs mt-1 text-gray-400">Range: 3.5-5.0 bar</div>
+                          </div>
+                          <div>
+                            <div className="text-sm mb-2">LUBE OIL PRESSURE</div>
+                            <div className="h-32 flex items-center justify-center">
+                              <div className="w-24 h-24 relative">
+                                <canvas id="lubePressureGauge" className="w-full h-full block"></canvas>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <div className="text-lg font-bold">{getCurrentValue(data.temperature_and_pressure?.['Lube oil pressure sensor'], 0).toFixed(2)}</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="text-center text-xs mt-1 text-gray-400">Range: 3.0-4.5 bar</div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {[1, 2].map((i) => (
+                            <div key={i}>
+                              <Skeleton variant="text" className="w-1/3 mb-2" />
+                              <div className="h-32 flex items-center justify-center">
+                                <Spinner variant="dual-ring" size="xl" color="primary" />
+                              </div>
+                              <Skeleton variant="text" className="w-full text-center mt-1" />
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )
+              })()}
+            </div>
+              <div className="bg-gray-800 rounded-lg p-4">
+              <div className="flex justify-between items-center mb-4" > 
                 <h3 className="font-medium">Alerts & Notifications</h3>
                 <span className="text-sm text-gray-400">Active Alerts: {Object.keys(data?.alerts || {}).length}</span>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-3 ">
                 {loading ? (
                   <>
                     {[1, 2, 3].map((i) => (
@@ -955,7 +958,7 @@ export default function EnginePropulsion() {
                 ) : (() => {
                   // prefer raw Alerts & Notifications if provided in SSE payload
                   const raw = rawData?.data ? (Array.isArray(rawData.data) ? rawData.data[0] : rawData.data) : null;
-                  const alerts = data?.alerts;                  
+                  const alerts = data?.alerts;
                   if (alerts) {
                     return (
                       <>
@@ -1016,7 +1019,7 @@ export default function EnginePropulsion() {
                   );
                 })()}
               </div>
-            </div>
+            </div>  
           </div>
 
           {/* Right Column */}
@@ -1029,71 +1032,71 @@ export default function EnginePropulsion() {
                 return null;
               }
               return (
-            <div className="bg-gray-800 rounded-lg p-4">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-medium">{(() => {
-                  // Prefer raw API sensor name if present in the SSE payload (rawData)
-                  if (rawData?.data) {
-                    const raw = Array.isArray(rawData.data) ? rawData.data[0] : rawData.data;
-                    const taRaw = (raw as any).trend_analysis as Record<string, any> | undefined;
-                    if (taRaw) {
-                      // Prefer exact API sensor name for exhaust if present
-                      const preferApiNames = ['Exhaust gas temperature sensor'];
-                      for (const apiName of preferApiNames) {
-                        if (apiName in taRaw && Array.isArray(taRaw[apiName]) && taRaw[apiName].length) {
-                          // humanize: remove 'sensor' and title-case
-                          return apiName.replace(/sensor/ig, '').trim().replace(/\b\w/g, (c) => c.toUpperCase());
-                        }
-                      }
-
-                      // Otherwise pick the first non-empty API key and humanize it (strip 'sensor')
-                      for (const k of Object.keys(taRaw)) {
-                        const arr = taRaw[k];
-                        if (Array.isArray(arr) && arr.length) {
-                          if (k.includes(' ')) {
-                            return k.replace(/sensor/ig, '').trim().replace(/\b\w/g, (c) => c.toUpperCase());
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="font-medium">{(() => {
+                      // Prefer raw API sensor name if present in the SSE payload (rawData)
+                      if (rawData?.data) {
+                        const raw = Array.isArray(rawData.data) ? rawData.data[0] : rawData.data;
+                        const taRaw = (raw as any).trend_analysis as Record<string, any> | undefined;
+                        if (taRaw) {
+                          // Prefer exact API sensor name for exhaust if present
+                          const preferApiNames = ['Exhaust gas temperature sensor'];
+                          for (const apiName of preferApiNames) {
+                            if (apiName in taRaw && Array.isArray(taRaw[apiName]) && taRaw[apiName].length) {
+                              // humanize: remove 'sensor' and title-case
+                              return apiName.replace(/sensor/ig, '').trim().replace(/\b\w/g, (c) => c.toUpperCase());
+                            }
                           }
-                          break; // fall through to normalized mapping below
+
+                          // Otherwise pick the first non-empty API key and humanize it (strip 'sensor')
+                          for (const k of Object.keys(taRaw)) {
+                            const arr = taRaw[k];
+                            if (Array.isArray(arr) && arr.length) {
+                              if (k.includes(' ')) {
+                                return k.replace(/sensor/ig, '').trim().replace(/\b\w/g, (c) => c.toUpperCase());
+                              }
+                              break; // fall through to normalized mapping below
+                            }
+                          }
                         }
                       }
-                    }
-                  }
 
-                  // Fallback: use normalized data keys (existing behavior)
-                  if (!data) return 'Trend Analysis';
-                  const ta = data.trend_analysis;
-                  const map: Record<string, string> = {
-                    engine_rpm: 'Engine RPM',
-                    shaft_rpm: 'Shaft RPM',
-                    exhaust_temp: 'Exhaust Gas Temperature',
-                    fuel_pressure: 'Fuel Pressure',
-                    lube_oil_temp: 'Lube Oil Temperature',
-                    vibration: 'Vibration',
-                  };
+                      // Fallback: use normalized data keys (existing behavior)
+                      if (!data) return 'Trend Analysis';
+                      const ta = data.trend_analysis;
+                      const map: Record<string, string> = {
+                        engine_rpm: 'Engine RPM',
+                        shaft_rpm: 'Shaft RPM',
+                        exhaust_temp: 'Exhaust Gas Temperature',
+                        fuel_pressure: 'Fuel Pressure',
+                        lube_oil_temp: 'Lube Oil Temperature',
+                        vibration: 'Vibration',
+                      };
 
-                  if (ta?.exhaust_temp && ta.exhaust_temp.length) return map.exhaust_temp;
+                      if (ta?.exhaust_temp && ta.exhaust_temp.length) return map.exhaust_temp;
 
-                  for (const k of Object.keys(ta || {})) {
-                    const arr = (ta as any)[k] as number[] | undefined;
-                    if (Array.isArray(arr) && arr.length) return map[k] || k;
-                  }
+                      for (const k of Object.keys(ta || {})) {
+                        const arr = (ta as any)[k] as number[] | undefined;
+                        if (Array.isArray(arr) && arr.length) return map[k] || k;
+                      }
 
-                  return 'Trend Analysis';
-                })()}</h3>
-                <div className="flex space-x-2">
-                  {/* <button className="text-xs px-2 py-1 bg-gray-700 rounded hover:bg-gray-600">24H</button>
+                      return 'Trend Analysis';
+                    })()}</h3>
+                    <div className="flex space-x-2">
+                      {/* <button className="text-xs px-2 py-1 bg-gray-700 rounded hover:bg-gray-600">24H</button>
                   <button className="text-xs px-2 py-1 bg-green-600 rounded">7D</button>
                   <button className="text-xs px-2 py-1 bg-gray-700 rounded hover:bg-gray-600">30D</button> */}
+                    </div>
+                  </div>
+                  {loading ? (
+                    <ChartSkeleton type="line" height="h-64" />
+                  ) : data ? (
+                    <div className="h-64"><canvas id="trendChart" className="w-full h-full block"></canvas></div>
+                  ) : (
+                    <ChartSkeleton type="line" height="h-64" />
+                  )}
                 </div>
-              </div>
-              {loading ? (
-                <ChartSkeleton type="line" height="h-64" />
-              ) : data ? (
-                <div className="h-64"><canvas id="trendChart" className="w-full h-full block"></canvas></div>
-              ) : (
-                <ChartSkeleton type="line" height="h-64" />
-              )}
-            </div>
               )
             })()}
 
@@ -1120,7 +1123,7 @@ export default function EnginePropulsion() {
                   // prefer raw "system status" object from SSE payload when available
                   const raw = rawData?.data ? (Array.isArray(rawData.data) ? rawData.data[0] : rawData.data) : null;
                   const systemStatus = data?.system_status;
-                  
+
                   if (systemStatus) {
                     return (
                       <>
