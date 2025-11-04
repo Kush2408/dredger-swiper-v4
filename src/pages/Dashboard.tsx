@@ -136,6 +136,7 @@ export default function Dashboard() {
     if (!obj || typeof obj !== 'object') return [];
 
     // Look for alerts object in the response
+    
     for (const [key, value] of Object.entries(obj)) {
       if (key.toLowerCase().includes('alert') && value && typeof value === 'object') {
         const alertsObj = value as Record<string, unknown>;

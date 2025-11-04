@@ -95,7 +95,7 @@ export default function SuctionSystem() {
     return values.map((value, index) => ({
       index,
       value,
-    }));
+    }));  
   };
 
   // Helper: find the first numeric array in an object, with optional preferred keys
@@ -350,12 +350,13 @@ export default function SuctionSystem() {
             </div>
 
             {/* Alerts & Notifications */}
-            <div className="bg-gray-800 rounded-lg p-4">
+           <div className="bg-gray-800 rounded-lg p-4 h-72 overflow-y-auto">
+
               <div className="flex justify-between items-center mb-4">
                 <h3 className="font-medium">Alerts & Notifications</h3>
                 <span className="text-sm text-gray-400">Active Alerts: 3/15</span>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {loading ? (
                   <>
                     {[1, 2, 3].map((i) => (
@@ -395,7 +396,7 @@ export default function SuctionSystem() {
                           const icon = isHigh ? 'fas fa-exclamation-circle' : isWarn ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
 
                           return (
-                            <div key={a.title} className={`border-l-4 ${border} pl-3 py-2 bg-gray-700 rounded`}>
+                            <div key={a.title} className={`border-l-4 ${border} pl-4 py-6 bg-gray-700 rounded`}>
                               <div className="flex justify-between items-center">
                                 <div>
                                   <div className={`font-semibold ${text}`}>{a.title}</div>
@@ -719,12 +720,12 @@ export default function SuctionSystem() {
             </div>
 
             {/* System Status */}
-            <div className="bg-gray-800 rounded-lg p-4">
+            <div className="bg-gray-800 rounded-lg p-4 h-56 overflow-y-auto">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="font-medium">System Status</h3>
                 <span className="text-sm text-gray-400">Real-time</span>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {loading ? (
                   <>
                     {[1, 2, 3].map((i) => (
@@ -756,7 +757,7 @@ export default function SuctionSystem() {
                       }
 
                       return (
-                        <div key={key} className="flex items-center justify-between">
+                        <div key={key} className="flex items-center justify-between bg-gray-700 rounded-lg p-4">
                           <div className="flex items-center">
                             <div className={`w-8 h-8 rounded-full ${bgColor} bg-opacity-20 flex items-center justify-center mr-2`}>
                               {icon}
