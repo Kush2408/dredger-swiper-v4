@@ -16,7 +16,7 @@ interface UseCachedSSEReturn<T> {
   error: string | null;
   isConnected: boolean;
   isConnecting: boolean;
-  loaFding: boolean;
+  loading: boolean;
   reconnect: () => void;
   close: () => void;
   isCached: boolean;
